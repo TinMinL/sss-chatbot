@@ -50,7 +50,7 @@
 
             // 3. 发送真实请求给 Python 后端
             try {
-                const response = await fetch('http://localhost:5000/api/chat', {
+                const response = await fetch('http://localhost:8000/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: message, student_id: 's14238060' })
