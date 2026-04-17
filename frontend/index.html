@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot Demo - Secondary School</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; padding: 20px; }
+        .chat-container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .chat-box { height: 300px; border: 1px solid #ccc; margin-bottom: 15px; padding: 10px; overflow-y: auto; background-color: #fafafa; }
+        .input-group { display: flex; }
+        input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px 0 0 5px; }
+        button { padding: 10px 20px; background-color: #0056b3; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2 style="text-align: center; color: #333;">Secondary School AI Assistant (Beta)</h2>
+        <div class="chat-box" id="chatBox">
+            <p><strong>System:</strong> Hello! I am your AI educational assistant. How can I help you with your studies today? (Remember, I will guide you using the Socratic method!)</p>
+        </div>
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="Ask a question about your homework...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+            if (input.value.trim() === '') return;
+            
+            // Display User Message
+            chatBox.innerHTML += `<p><strong>You:</strong> ${input.value}</p>`;
+            
+            // Simulation of Backend API Call
+            setTimeout(() => {
+                chatBox.innerHTML += `<p><strong>AI Assistant:</strong> That's an interesting question! To help you understand, what do you think is the first step to solving this problem? (Demo Response)</p>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+            
+            input.value = '';
+        }
+    </script>
+</body>
+</html>
