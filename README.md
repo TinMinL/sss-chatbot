@@ -34,11 +34,10 @@ To run this demo locally, you will need:
 
 ## Installation & Setup Guide
 
-**1. Start the Backend Server:**
-Open a terminal in the `/backend` directory and run:
+**1. Clone the repository:**
 ```bash
-python app.py 
-# The API will start running on http://localhost:5000 
+git clone https://github.com/TinMinL/sss-chatbot.git
+cd sss-chatbot
 ```
 
 **2. Start the Frontend UI:**
