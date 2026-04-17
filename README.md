@@ -17,37 +17,37 @@ This project was developed as part of the **COMP 3510SEF / COMP S351F - Software
 
 ## System Architecture & Tech Stack
 * **Frontend (Presentation Layer):** Lightweight Vanilla HTML/CSS/JS (optimized for fast loading times).
-* **Backend (Application Layer):** Python (API Gateway & Logic).
-* **Database (Data Layer):** SQL (Session Logs & User Auth).
-* **AI Engine (Knowledge Layer):** LLM API with Retrieval-Augmented Generation (RAG) to ensure Zero Hallucination and curriculum alignment.
+* **Backend (Application Layer):** Python (Flask API Gateway & Logic).
+* **Database (Data Layer):** SQLite (Session Logs & User Auth).
+* **AI Engine (Knowledge Layer):** DeepSeek LLM API with Retrieval-Augmented Generation (RAG) constraints to ensure Zero Hallucination and curriculum alignment.
 
 ## Repository Structure
 * `/frontend/` - Contains all HTML, CSS, and JavaScript files for the web-based chat interface.
 * `/backend/` - Contains the Python API gateway and logic.
-* `/database/` - Contains SQL setup scripts and mock schema.
 
 ## Prerequisites
 To run this demo locally, you will need:
 * Python 3.8 or higher
-* pip (Python package installer)
-* A modern web browser
+* A valid DeepSeek API Key (You can get one for free at platform.deepseek.com)
 
-## Installation & Setup Guide
+## 🚀 How to Run the Application (One-Click Setup)
+
+We have implemented an automated deployment script for seamless User Acceptance Testing (UAT).
 
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/TinMinL/sss-chatbot.git
+git clone [https://github.com/TinMinL/sss-chatbot.git](https://github.com/TinMinL/sss-chatbot.git)
 cd sss-chatbot
 ```
 
-**2. Start the Frontend UI:**
-Navigate to the `/frontend` folder and use a local server to avoid CORS issues:
-```bash
-cd frontend
-python -m http.server 8000
-# Open your browser and go to http://localhost:8000
-```
+**2. Run the Launcher:**
+Simply double-click the `start.bat` file in the root directory. 
+
+**3. API Key Configuration:**
+* If this is your first time running the application, the terminal will safely prompt you to paste your **DeepSeek API Key**.
+* The script will automatically generate a secure `.env` file for you and install all required Python dependencies.
+* The frontend UI will automatically open in your default browser at `http://localhost:8000`.
 
 ## ⚠️ Important Notes for Assessment
-* **Cost Management Constraints:** To adhere to our Earned Value Management (EVM) cost baselines (CPI tracking), the API calls in this demo are restricted by token limits per user session. Frequent queries are cached locally to minimize cloud API costs.
-* **Quality Assurance (QA):** As documented in the project report, rigorous automated system testing and AI Safety Testing have been conducted to evaluate prompt retrieval accuracy and strictly mitigate hallucination risks. The setup of these automated tests and performance reporting is an integral part of our QA pipeline.
+* **Cost Management Constraints:** To adhere to our Earned Value Management (EVM) cost baselines (CPI tracking), the API calls in this demo are restricted by token limits per user session. 
+* **Quality Assurance (QA) & Security:** Hardcoding API keys is strictly prohibited in our repository. The auto-prompt feature in our deployment script ensures secure environment variable management. As documented in the project report, rigorous AI Safety Testing has been conducted to strictly mitigate hallucination risks.
