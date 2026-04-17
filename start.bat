@@ -13,14 +13,15 @@ if %errorlevel% neq 0 (
     exit
 )
 
-echo [1/3] Starting Python Backend Server (Port 5000)...
-start "AI Backend Server" cmd /k "cd backend && python app.py"
+echo [1/3] Installing dependencies and starting Python Backend (Port 5000)...
+:: Here is the magic: it will auto-install requirements before running app.py
+start "AI Backend Server" cmd /k "cd backend && pip install -r requirements.txt && python app.py"
 
 echo [2/3] Starting Frontend Web Server (Port 8000)...
 start "AI Frontend Server" cmd /k "cd frontend && python -m http.server 8000"
 
 echo [3/3] Waiting for servers to initialize...
-timeout /t 3 /nobreak >nul
+timeout /t 5 /nobreak >nul
 
 echo Launching application in your default browser...
 start http://localhost:8000
