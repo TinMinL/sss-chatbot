@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from google import genai
+from openai import OpenAI
 import sqlite3
 import os
 from dotenv import load_dotenv
@@ -11,10 +11,11 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app) # 允许前端请求后端
 
-# 使用最新的 Google GenAI SDK
-api_key = os.getenv("GEMINI_API_KEY")
+# 配置 DeepSeek API (使用 OpenAI 兼容客户端)
+api_key = os.getenv("DEEPSEEK_API_KEY")
 if api_key:
-    client = genai.Client(api_key=api_key)
+    # DeepSeek 的基础 URL 是 https://api.deepseek.com
+    client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
 else:
     client = None
 
@@ -50,16 +51,18 @@ def chat():
         "You are an educational AI assistant for secondary school students in Hong Kong. "
         "IMPORTANT RULE: Use the Socratic method. DO NOT give direct answers. "
         "Instead, ask guiding questions to help the student find the answer themselves. "
-        f"Student question: {user_message}"
     )
 
     try:
-        # 使用新版 SDK 调用大模型
-        response = client.models.generate_content(
-            model='gemini-1.5-flash',
-            contents=system_prompt
+        # 调用 DeepSeek 大模型
+        response = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
+            ]
         )
-        ai_reply = response.text
+        ai_reply = response.choices[0].message.content
 
         # 记录到真实的数据库
         conn = sqlite3.connect('chatbot_sessions.db')
@@ -78,5 +81,5 @@ def chat():
         return jsonify({"status": "error", "response": "Sorry, the AI is taking a short break."}), 500
 
 if __name__ == '__main__':
-    print("Starting REAL AI Chatbot Backend Server on port 5000 (Upgraded SDK)...")
+    print("Starting REAL AI Chatbot Backend Server on port 5000 (Powered by DeepSeek)...")
     app.run(debug=True, port=5000)
